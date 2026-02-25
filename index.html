@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agroavícola La Fronda CA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    :root {
+      --green-dark:   #1a5c28;
+      --green-main:   #2e8b44;
+      --green-mid:    #3da857;
+      --green-light:  #6dcf82;
+      --green-pale:   #e6f4ea;
+      --white:        #ffffff;
+      --off-white:    #f7faf8;
+      --gray-text:    #444444;
+      --gray-light:   #888888;
+      --shadow:       0 8px 32px rgba(46,139,68,.13);
+      --radius:       16px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      color: var(--gray-text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      height: 70px;
+      background: #ffffff;
+      box-shadow: 0 2px 18px rgba(46,139,68,.10);
+      transition: all .3s;
+    }
+    nav.scrolled {
+      height: 60px;
+      box-shadow: 0 4px 24px rgba(46,139,68,.18);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px; text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--green-main), var(--green-dark));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 20px;
+      flex-shrink: 0;
+    }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-text strong {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .95rem; font-weight: 700;
+      color: var(--green-dark);
+    }
+    .nav-logo-text span { font-size: .72rem; color: var(--green-mid); letter-spacing: .5px; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: .85rem; font-weight: 600;
+      color: var(--gray-text);
+      letter-spacing: .3px;
+      transition: color .25s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+      height: 2px; background: var(--green-main);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .25s;
+    }
+    .nav-links a:hover { color: var(--green-main); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+    .nav-cta {
+      background: var(--green-main); color: white !important;
+      padding: 8px 20px; border-radius: 50px;
+      transition: background .25s, transform .2s !important;
+    }
+    .nav-cta:hover { background: var(--green-dark) !important; transform: translateY(-1px); }
+    .nav-cta::after { display: none !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--green-dark); border-radius: 2px; transition: .3s; }
+
+    /* ─── HERO ────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      background:
+        linear-gradient(160deg, rgba(26,92,40,.78) 0%, rgba(46,139,68,.45) 60%, rgba(109,207,130,.18) 100%),
+        url('fotos/granja-aerea-lago.jpg') center/cover no-repeat;
+      overflow: hidden;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(61,168,87,.18) 0%, transparent 70%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; color: white;
+      padding: 100px 20px 60px;
+      max-width: 800px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.3);
+      color: white; border-radius: 50px;
+      padding: 7px 18px; font-size: .8rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      margin-bottom: 24px;
+      animation: fadeDown .8s ease both;
+    }
+    .hero-badge i { color: var(--green-light); }
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 800; line-height: 1.1;
+      margin-bottom: 20px;
+      animation: fadeDown .9s .1s ease both;
+    }
+    .hero-title span { color: var(--green-light); }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-weight: 300; line-height: 1.7;
+      opacity: .9; margin-bottom: 40px;
+      animation: fadeDown 1s .2s ease both;
+    }
+    .hero-btns {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      animation: fadeDown 1.1s .3s ease both;
+    }
+    .btn-primary {
+      background: var(--white); color: var(--green-dark);
+      padding: 14px 32px; border-radius: 50px;
+      font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: .9rem;
+      text-decoration: none; transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,.2);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,.25); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,.7); color: white;
+      padding: 12px 32px; border-radius: 50px;
+      font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: .9rem;
+      text-decoration: none; transition: background .2s, border-color .2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.15); border-color: white; }
+    .hero-scroll {
+      position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,.7); font-size: .75rem; text-transform: uppercase;
+      letter-spacing: 2px; animation: bounce 2s infinite;
+      text-decoration: none;
+    }
+    .hero-scroll i { font-size: 1.3rem; }
+    .hero-stats {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: rgba(26,92,40,.75);
+      backdrop-filter: blur(10px);
+      display: flex; justify-content: center; gap: 0;
+      animation: fadeUp .8s .5s ease both; opacity: 0;
+      animation-fill-mode: forwards;
+    }
+    .hero-stat {
+      padding: 20px 40px;
+      text-align: center; color: white;
+      border-right: 1px solid rgba(255,255,255,.15);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem; font-weight: 800; color: var(--green-light);
+    }
+    .hero-stat-label { font-size: .75rem; opacity: .85; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ─── SECTIONS ────────────────────────────────── */
+    section { padding: 90px 5vw; }
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green-pale); color: var(--green-dark);
+      font-size: .75rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; padding: 6px 16px; border-radius: 50px;
+      margin-bottom: 16px;
+    }
+    .section-tag i { font-size: .8rem; }
+    h2.section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 800; color: var(--green-dark);
+      line-height: 1.2; margin-bottom: 20px;
+    }
+    .section-line {
+      width: 60px; height: 4px;
+      background: linear-gradient(90deg, var(--green-main), var(--green-light));
+      border-radius: 2px; margin-bottom: 24px;
+    }
+    .section-desc {
+      font-size: 1.05rem; line-height: 1.8;
+      color: var(--gray-text); max-width: 600px;
+    }
+
+    /* ─── QUIÉNES SOMOS ───────────────────────────── */
+    #quienes {
+      background: var(--off-white);
+    }
+    .quienes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .quienes-img-wrap {
+      position: relative;
+    }
+    .quienes-img-main {
+      width: 100%; height: 460px; object-fit: cover;
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+    }
+    .quienes-img-badge {
+      position: absolute; bottom: -20px; right: -20px;
+      background: var(--green-main); color: white;
+      border-radius: 20px; padding: 20px 28px;
+      text-align: center;
+      box-shadow: 0 8px 28px rgba(46,139,68,.35);
+    }
+    .quienes-img-badge .num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem; font-weight: 800; display: block; line-height: 1;
+    }
+    .quienes-img-badge .lbl { font-size: .78rem; opacity: .9; text-transform: uppercase; letter-spacing: 1px; }
+    .valores-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-top: 32px;
+    }
+    .valor-card {
+      background: white; border-radius: 14px;
+      padding: 18px 20px;
+      border-left: 4px solid var(--green-main);
+      box-shadow: 0 2px 12px rgba(46,139,68,.08);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .valor-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .valor-card i { color: var(--green-main); font-size: 1.3rem; margin-bottom: 8px; display: block; }
+    .valor-card h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .88rem; font-weight: 700;
+      color: var(--green-dark); margin-bottom: 4px;
+    }
+    .valor-card p { font-size: .82rem; color: var(--gray-light); line-height: 1.5; }
+
+    /* ─── QUÉ HACEMOS ─────────────────────────────── */
+    #que {
+      background: var(--white);
+    }
+    .que-header {
+      text-align: center; max-width: 640px;
+      margin: 0 auto 60px;
+    }
+    .que-header .section-line { margin: 0 auto 24px; }
+    .servicios-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px; max-width: 1200px; margin: 0 auto;
+    }
+    .servicio-card {
+      background: var(--off-white); border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(46,139,68,.07);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .servicio-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+    .servicio-img {
+      width: 100%; height: 200px; object-fit: cover;
+    }
+    .servicio-body { padding: 26px 24px; }
+    .servicio-icon {
+      width: 48px; height: 48px;
+      background: var(--green-pale);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .servicio-icon i { color: var(--green-main); font-size: 1.4rem; }
+    .servicio-body h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--green-dark); margin-bottom: 10px;
+    }
+    .servicio-body p { font-size: .9rem; line-height: 1.7; color: var(--gray-light); }
+
+    /* ─── CÓMO LO HACEMOS ─────────────────────────── */
+    #como {
+      background: linear-gradient(160deg, var(--green-dark) 0%, #1e7035 100%);
+      color: white; position: relative; overflow: hidden;
+    }
+    #como::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 350px; height: 350px;
+      border-radius: 50%;
+      background: rgba(109,207,130,.12);
+    }
+    #como::after {
+      content: '';
+      position: absolute; bottom: -80px; left: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: rgba(109,207,130,.08);
+    }
+    .como-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+    .como-header { text-align: center; margin-bottom: 60px; }
+    .como-header .section-tag { background: rgba(255,255,255,.12); color: white; }
+    .como-header h2 { color: white; }
+    .como-header p { color: rgba(255,255,255,.8); max-width: 600px; margin: 0 auto; font-size: 1.05rem; line-height: 1.8; }
+    .proceso-steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0;
+    }
+    .paso {
+      padding: 32px 28px;
+      position: relative; text-align: center;
+    }
+    .paso:not(:last-child)::after {
+      content: '';
+      position: absolute; right: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 1px; height: 60%;
+      background: rgba(255,255,255,.15);
+    }
+    .paso-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem; font-weight: 800;
+      color: rgba(255,255,255,.1);
+      line-height: 1; margin-bottom: 12px;
+    }
+    .paso-icon {
+      width: 70px; height: 70px;
+      background: rgba(255,255,255,.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      transition: background .3s;
+    }
+    .paso:hover .paso-icon { background: rgba(255,255,255,.2); }
+    .paso-icon i { font-size: 1.8rem; color: var(--green-light); }
+    .paso h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      color: white; margin-bottom: 10px;
+    }
+    .paso p { font-size: .85rem; color: rgba(255,255,255,.75); line-height: 1.6; }
+
+    /* ─── FOTOS / GALERÍA ─────────────────────────── */
+    #galeria {
+      background: var(--off-white);
+      padding-top: 0;
+    }
+    .galeria-header {
+      text-align: center; padding: 80px 5vw 48px;
+    }
+    .galeria-header .section-line { margin: 0 auto 24px; }
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 260px 260px;
+      gap: 16px;
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 5vw 80px;
+    }
+    .photo-item {
+      border-radius: 16px; overflow: hidden;
+      position: relative;
+    }
+    .photo-item:first-child { grid-row: 1 / 3; }
+    .photo-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .5s;
+    }
+    .photo-item:hover img { transform: scale(1.06); }
+    .photo-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,92,40,.5) 0%, transparent 50%);
+      opacity: 0; transition: opacity .3s;
+      display: flex; align-items: flex-end; padding: 20px;
+    }
+    .photo-item:hover .photo-overlay { opacity: 1; }
+    .photo-overlay span {
+      color: white; font-size: .85rem; font-weight: 600;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* ─── REDES SOCIALES ──────────────────────────── */
+    #redes {
+      background: var(--white);
+    }
+    .redes-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+    .redes-inner .section-line { margin: 0 auto 24px; }
+    .redes-inner .section-desc { margin: 0 auto 48px; }
+    .redes-grid {
+      display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+    }
+    .red-card {
+      width: 160px;
+      background: var(--off-white); border-radius: 20px;
+      padding: 28px 20px; text-align: center;
+      text-decoration: none; color: var(--gray-text);
+      box-shadow: 0 4px 20px rgba(46,139,68,.07);
+      transition: transform .3s, box-shadow .3s, background .3s;
+      position: relative; overflow: hidden;
+    }
+    .red-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      opacity: 0; transition: opacity .3s;
+    }
+    .red-card.ig::before { background: linear-gradient(135deg, #f58529, #dd2a7b, #515bd4); }
+    .red-card.fb::before { background: #1877f2; }
+    .red-card.yt::before { background: #ff0000; }
+    .red-card.wa::before { background: #25d366; }
+    .red-card.tw::before { background: #000000; }
+    .red-card:hover { transform: translateY(-6px); box-shadow: 0 12px 32px rgba(0,0,0,.12); }
+    .red-card:hover::before { opacity: 1; }
+    .red-card:hover .red-icon,
+    .red-card:hover .red-name,
+    .red-card:hover .red-handle { color: white !important; }
+    .red-icon { font-size: 2.2rem; margin-bottom: 12px; display: block; position: relative; z-index: 1; transition: color .3s; }
+    .red-card.ig .red-icon { color: #e1306c; }
+    .red-card.fb .red-icon { color: #1877f2; }
+    .red-card.yt .red-icon { color: #ff0000; }
+    .red-card.wa .red-icon { color: #25d366; }
+    .red-card.tw .red-icon { color: #333; }
+    .red-name { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: .85rem; position: relative; z-index: 1; transition: color .3s; }
+    .red-handle { font-size: .75rem; color: var(--gray-light); margin-top: 4px; position: relative; z-index: 1; transition: color .3s; }
+
+    /* ─── CONTACTO ────────────────────────────────── */
+    #contacto {
+      background: var(--off-white);
+    }
+    .contacto-grid {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 60px; align-items: start;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .contacto-info h2 { margin-bottom: 12px; }
+    .contacto-info .section-desc { margin-bottom: 40px; }
+    .contact-item {
+      display: flex; gap: 16px; align-items: flex-start;
+      margin-bottom: 24px;
+    }
+    .contact-item-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: var(--green-pale); border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-item-icon i { color: var(--green-main); font-size: 1.2rem; }
+    .contact-item-text h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: .9rem; color: var(--green-dark);
+      margin-bottom: 4px;
+    }
+    .contact-item-text p { font-size: .9rem; color: var(--gray-light); line-height: 1.5; }
+    .contact-form {
+      background: white; border-radius: 24px;
+      padding: 40px 36px;
+      box-shadow: var(--shadow);
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: .82rem; font-weight: 700;
+      color: var(--green-dark); margin-bottom: 8px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%; border: 2px solid #e0ece3;
+      border-radius: 12px; padding: 12px 16px;
+      font-family: 'Lato', sans-serif; font-size: .92rem;
+      color: var(--gray-text); background: var(--off-white);
+      outline: none; transition: border-color .25s, box-shadow .25s;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--green-main);
+      box-shadow: 0 0 0 4px rgba(46,139,68,.1);
+      background: white;
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .btn-send {
+      width: 100%;
+      background: linear-gradient(135deg, var(--green-main), var(--green-dark));
+      color: white; border: none; border-radius: 50px;
+      padding: 16px; font-family: 'Montserrat', sans-serif;
+      font-size: .95rem; font-weight: 700; cursor: pointer;
+      transition: opacity .2s, transform .2s;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .btn-send:hover { opacity: .92; transform: translateY(-2px); }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      background: var(--green-dark); color: white;
+      padding: 60px 5vw 30px;
+    }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px; max-width: 1100px; margin: 0 auto 48px;
+    }
+    .footer-brand .logo-icon {
+      width: 50px; height: 50px;
+      background: rgba(255,255,255,.1);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; margin-bottom: 16px;
+    }
+    .footer-brand h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem; font-weight: 700; margin-bottom: 10px;
+    }
+    .footer-brand p { font-size: .88rem; opacity: .75; line-height: 1.7; max-width: 280px; }
+    .footer-social { display: flex; gap: 10px; margin-top: 20px; }
+    .footer-social a {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,.1);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; text-decoration: none; font-size: .9rem;
+      transition: background .2s;
+    }
+    .footer-social a:hover { background: var(--green-mid); }
+    .footer-col h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: .88rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      margin-bottom: 18px; opacity: .9;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 10px; }
+    .footer-col ul li a {
+      text-decoration: none; color: rgba(255,255,255,.7);
+      font-size: .88rem; transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--green-light); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding-top: 24px; text-align: center;
+      font-size: .82rem; opacity: .6;
+      max-width: 1100px; margin: 0 auto;
+    }
+
+    /* ─── SCROLL REVEAL ───────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-left { opacity: 0; transform: translateX(-32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-left.visible { opacity: 1; transform: none; }
+    .reveal-right { opacity: 0; transform: translateX(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal-right.visible { opacity: 1; transform: none; }
+
+    /* ─── KEYFRAMES ───────────────────────────────── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .quienes-grid { grid-template-columns: 1fr; }
+      .quienes-img-badge { right: 12px; }
+      .contacto-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .photo-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .photo-item:first-child { grid-row: auto; }
+    }
+    @media (max-width: 640px) {
+      section { padding: 64px 5vw; }
+      /* ── Hero móvil: saca stats del flujo absoluto ── */
+      #hero {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        min-height: 100svh;
+      }
+      .hero-content {
+        padding-top: 110px;
+        padding-bottom: 32px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-stats {
+        position: static;
+        width: 100%;
+        flex-direction: column;
+        opacity: 1 !important;
+        animation: none !important;
+        transform: none !important;
+      }
+      .hero-stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,.15); padding: 16px 24px; }
+      .hero-stat:last-child { border-bottom: none; }
+      .hero-scroll { display: none; }
+      /* ── resto ── */
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .photo-grid { grid-template-columns: 1fr; }
+      .valores-grid { grid-template-columns: 1fr; }
+      .proceso-steps { grid-template-columns: 1fr 1fr; }
+      .paso::after { display: none; }
+    }
+
+    /* ─── LOGO NAV ────────────────────────────────── */
+    .nav-logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    /* ─── MOBILE NAV ──────────────────────────────── */
+    .mobile-menu {
+      display: none;
+      position: fixed; top: 70px; left: 0; right: 0; z-index: 999;
+      background: white;
+      box-shadow: 0 8px 24px rgba(0,0,0,.1);
+      flex-direction: column;
+      padding: 20px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      text-decoration: none; color: var(--gray-text);
+      font-family: 'Montserrat', sans-serif; font-size: .95rem; font-weight: 600;
+      padding: 12px 0; border-bottom: 1px solid var(--green-pale);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══════════════════════════════════════════ -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <img src="fotos/logo.png" alt="La Fronda Agroavícola" class="nav-logo-img"/>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#quienes">Quiénes Somos</a></li>
+      <li><a href="#que">Qué Hacemos</a></li>
+      <li><a href="#como">Proceso</a></li>
+      <li><a href="#galeria">Galería</a></li>
+      <li><a href="#redes">Redes</a></li>
+      <li><a href="#contacto" class="nav-cta">Contáctanos</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#quienes" onclick="toggleMenu()">Quiénes Somos</a>
+    <a href="#que" onclick="toggleMenu()">Qué Hacemos</a>
+    <a href="#como" onclick="toggleMenu()">Proceso</a>
+    <a href="#galeria" onclick="toggleMenu()">Galería</a>
+    <a href="#redes" onclick="toggleMenu()">Redes</a>
+    <a href="#contacto" onclick="toggleMenu()">Contáctanos</a>
+  </div>
+
+  <!-- ══ HERO ══════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fas fa-leaf"></i>
+        Empresa Venezolana &bull; Calidad Garantizada
+      </div>
+      <h1 class="hero-title">
+        Agroavícola<br/><span>La Fronda</span> CA
+      </h1>
+      <p class="hero-sub">
+        Producción avícola de excelencia, especialistas en gallinas ponedoras.<br/>
+        Del campo a tu mesa con el más alto estándar de calidad.
+      </p>
+      <div class="hero-btns">
+        <a href="#quienes" class="btn-primary">Conócenos</a>
+        <a href="#contacto" class="btn-outline">Contáctanos</a>
+      </div>
+    </div>
+    <a href="#quienes" class="hero-scroll">
+      <span>Explorar</span>
+      <i class="fas fa-chevron-down"></i>
+    </a>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-target="20">0</div>
+        <div class="hero-stat-label">Años de experiencia</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-target="50000">0</div>
+        <div class="hero-stat-label">Gallinas ponedoras</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-target="100">0</div>
+        <div class="hero-stat-label">% Compromiso</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num" data-target="365">0</div>
+        <div class="hero-stat-label">Días al año activos</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ QUIÉNES SOMOS ═════════════════════════════════ -->
+  <section id="quienes">
+    <div class="quienes-grid">
+      <div class="quienes-img-wrap reveal-left">
+        <img class="quienes-img-main"
+          src="fotos/galpones-interior.jpg"
+          alt="Granja La Fronda"/>
+        <div class="quienes-img-badge">
+          <span class="num">+20</span>
+          <span class="lbl">Años de<br/>trayectoria</span>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="section-tag"><i class="fas fa-seedling"></i> Quiénes Somos</div>
+        <h2 class="section-title">Una empresa<br/>con raíces en la tierra</h2>
+        <div class="section-line"></div>
+        <p class="section-desc">
+          <strong>Agroavícola La Fronda CA</strong> es una empresa venezolana con amplia trayectoria
+          en la producción avícola. Nos especializamos en la cría de gallinas ponedoras bajo los
+          más altos estándares de bienestar animal, sostenibilidad y calidad alimentaria.
+        </p>
+        <p class="section-desc" style="margin-top:16px;">
+          Nuestro equipo combina la experiencia generacional del campo venezolano con las mejores
+          prácticas modernas para ofrecerte huevos frescos, nutritivos y producidos con
+          responsabilidad.
+        </p>
+        <div class="valores-grid" style="margin-top:32px;">
+          <div class="valor-card">
+            <i class="fas fa-heart"></i>
+            <h4>Bienestar Animal</h4>
+            <p>Nuestras gallinas crecen en entornos cómodos y saludables.</p>
+          </div>
+          <div class="valor-card">
+            <i class="fas fa-leaf"></i>
+            <h4>Sostenibilidad</h4>
+            <p>Prácticas responsables que cuidan el medio ambiente.</p>
+          </div>
+          <div class="valor-card">
+            <i class="fas fa-medal"></i>
+            <h4>Calidad Total</h4>
+            <p>Control riguroso en cada etapa del proceso productivo.</p>
+          </div>
+          <div class="valor-card">
+            <i class="fas fa-handshake"></i>
+            <h4>Compromiso</h4>
+            <p>Alianza confiable con nuestros clientes y productores.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ QUÉ HACEMOS ═══════════════════════════════════ -->
+  <section id="que">
+    <div class="que-header reveal">
+      <div class="section-tag"><i class="fas fa-industry"></i> Qué Hacemos</div>
+      <h2 class="section-title">Nuestros Productos<br/>y Servicios</h2>
+      <div class="section-line"></div>
+      <p class="section-desc">
+        Desde la producción hasta la distribución, garantizamos un producto fresco y de
+        primera calidad en cada entrega.
+      </p>
+    </div>
+    <div class="servicios-grid">
+      <div class="servicio-card reveal" style="transition-delay:.0s">
+        <img class="servicio-img"
+          src="fotos/huevos-bandejas.jpg"
+          alt="Huevos frescos"/>
+        <div class="servicio-body">
+          <div class="servicio-icon"><i class="fas fa-egg"></i></div>
+          <h3>Huevos Frescos de Calidad</h3>
+          <p>Producción diaria de huevos frescos, clasificados por tamaño y listos para el consumo masivo y minorista.</p>
+        </div>
+      </div>
+      <div class="servicio-card reveal" style="transition-delay:.1s">
+        <img class="servicio-img"
+          src="fotos/gallinas-closeup.jpg"
+          alt="Gallinas ponedoras"/>
+        <div class="servicio-body">
+          <div class="servicio-icon"><i class="fas fa-dove"></i></div>
+          <h3>Cría de Gallinas Ponedoras</h3>
+          <p>Manejo especializado de razas seleccionadas para maximizar la productividad con bienestar animal garantizado.</p>
+        </div>
+      </div>
+      <div class="servicio-card reveal" style="transition-delay:.2s">
+        <img class="servicio-img"
+          src="fotos/huevos-clasificacion.jpg"
+          alt="Clasificación de huevos"/>
+        <div class="servicio-body">
+          <div class="servicio-icon"><i class="fas fa-truck"></i></div>
+          <h3>Distribución y Entrega</h3>
+          <p>Red de distribución confiable para llevar nuestros productos frescos a supermercados, abastos y consumidores.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CÓMO LO HACEMOS ══════════════════════════════ -->
+  <section id="como">
+    <div class="como-inner">
+      <div class="como-header reveal">
+        <div class="section-tag"><i class="fas fa-cogs"></i> Cómo Lo Hacemos</div>
+        <h2 class="section-title">Nuestro Proceso Productivo</h2>
+        <div class="section-line" style="margin:0 auto 24px;"></div>
+        <p>Un proceso cuidadoso, paso a paso, que garantiza la calidad en cada huevo que producimos.</p>
+      </div>
+      <div class="proceso-steps">
+        <div class="paso reveal" style="transition-delay:.0s">
+          <div class="paso-num">01</div>
+          <div class="paso-icon"><i class="fas fa-seedling"></i></div>
+          <h4>Selección de Aves</h4>
+          <p>Elegimos razas de alta postura, adaptadas al clima venezolano y con excelente rendimiento productivo.</p>
+        </div>
+        <div class="paso reveal" style="transition-delay:.1s">
+          <div class="paso-num">02</div>
+          <div class="paso-icon"><i class="fas fa-wheat-awn"></i></div>
+          <h4>Alimentación Balanceada</h4>
+          <p>Nutrición controlada con alimentos de calidad que aportan los nutrientes necesarios para una postura óptima.</p>
+        </div>
+        <div class="paso reveal" style="transition-delay:.2s">
+          <div class="paso-num">03</div>
+          <div class="paso-icon"><i class="fas fa-stethoscope"></i></div>
+          <h4>Control Sanitario</h4>
+          <p>Programa veterinario permanente con vacunaciones, bioseguridad y monitoreo constante del estado de salud.</p>
+        </div>
+        <div class="paso reveal" style="transition-delay:.3s">
+          <div class="paso-num">04</div>
+          <div class="paso-icon"><i class="fas fa-box-open"></i></div>
+          <h4>Recolección y Clasificación</h4>
+          <p>Recolección diaria, limpieza e inspección para clasificar por peso y garantizar la frescura del producto.</p>
+        </div>
+        <div class="paso reveal" style="transition-delay:.4s">
+          <div class="paso-num">05</div>
+          <div class="paso-icon"><i class="fas fa-truck-fast"></i></div>
+          <h4>Distribución</h4>
+          <p>Entrega oportuna manteniendo la cadena de frescura desde la granja hasta el punto de venta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ GALERÍA ════════════════════════════════════════ -->
+  <section id="galeria" style="padding:0;">
+    <div class="galeria-header reveal">
+      <div class="section-tag"><i class="fas fa-images"></i> Nuestra Granja</div>
+      <h2 class="section-title">Un vistazo a<br/>La Fronda</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="photo-grid">
+      <div class="photo-item reveal-left">
+        <img src="fotos/granja-aerea-2.jpg" alt="Vista aérea Granja La Fronda"/>
+        <div class="photo-overlay"><span>Vista Aérea de la Granja</span></div>
+      </div>
+      <div class="photo-item reveal">
+        <img src="fotos/huevos-bandejas.jpg" alt="Huevos frescos en bandejas"/>
+        <div class="photo-overlay"><span>Producción Diaria</span></div>
+      </div>
+      <div class="photo-item reveal" style="transition-delay:.1s">
+        <img src="fotos/gallinas-primer-plano.jpg" alt="Gallinas ponedoras"/>
+        <div class="photo-overlay"><span>Nuestras Aves</span></div>
+      </div>
+      <div class="photo-item reveal" style="transition-delay:.2s">
+        <img src="fotos/jaulas-pasillo.jpg" alt="Instalaciones modernas"/>
+        <div class="photo-overlay"><span>Instalaciones Modernas</span></div>
+      </div>
+      <div class="photo-item reveal" style="transition-delay:.3s">
+        <img src="fotos/galpon-abierto.jpg" alt="Galpón de producción"/>
+        <div class="photo-overlay"><span>Galpones de Producción</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ REDES SOCIALES ════════════════════════════════ -->
+  <section id="redes">
+    <div class="redes-inner">
+      <div class="section-tag" style="margin:0 auto 16px;"><i class="fas fa-share-nodes"></i> Síguenos</div>
+      <h2 class="section-title reveal">Conéctate con<br/>La Fronda</h2>
+      <div class="section-line" style="margin:0 auto 24px;"></div>
+      <p class="section-desc reveal">
+        Síguenos en nuestras redes sociales para ver el día a día de la granja,
+        promociones y novedades de Agroavícola La Fronda CA.
+      </p>
+      <div class="redes-grid reveal">
+        <a href="https://www.instagram.com/ag.lafronda" target="_blank" class="red-card ig">
+          <i class="fab fa-instagram red-icon"></i>
+          <div class="red-name">Instagram</div>
+          <div class="red-handle">@ag.lafronda</div>
+        </a>
+        <a href="#" class="red-card fb">
+          <i class="fab fa-facebook red-icon"></i>
+          <div class="red-name">Facebook</div>
+          <div class="red-handle">Agroavícola La Fronda</div>
+        </a>
+        <a href="#" class="red-card yt">
+          <i class="fab fa-youtube red-icon"></i>
+          <div class="red-name">YouTube</div>
+          <div class="red-handle">La Fronda CA</div>
+        </a>
+        <a href="https://wa.me/584125680971" target="_blank" class="red-card wa">
+          <i class="fab fa-whatsapp red-icon"></i>
+          <div class="red-name">WhatsApp</div>
+          <div class="red-handle">+58 412 568 0971</div>
+        </a>
+        <a href="#" class="red-card tw">
+          <i class="fab fa-x-twitter red-icon"></i>
+          <div class="red-name">X / Twitter</div>
+          <div class="red-handle">@LaFrondaCA</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTACTO ══════════════════════════════════════ -->
+  <section id="contacto">
+    <div class="contacto-grid">
+      <div class="contacto-info reveal-left">
+        <div class="section-tag"><i class="fas fa-envelope"></i> Contacto</div>
+        <h2 class="section-title">Hablemos<br/>de tu pedido</h2>
+        <div class="section-line"></div>
+        <p class="section-desc">
+          ¿Tienes preguntas sobre nuestros productos o quieres realizar un pedido?
+          Escríbenos, estaremos encantados de atenderte.
+        </p>
+        <div style="margin-top:36px;">
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-item-text">
+              <h4>Ubicación</h4>
+              <p>Venezuela — Aragua, Guárico</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+            <div class="contact-item-text">
+              <h4>Teléfono / WhatsApp</h4>
+              <p>+58 412 568 0971</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-item-text">
+              <h4>Correo Electrónico</h4>
+              <p>ventas.lafronda@gmail.com</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-clock"></i></div>
+            <div class="contact-item-text">
+              <h4>Horario de Atención</h4>
+              <p>Lunes a Viernes: 7:00 am – 5:00 pm<br/>Sábados: 7:00 am – 12:00 pm</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal-right">
+        <h3 style="font-family:'Montserrat',sans-serif;font-size:1.2rem;font-weight:800;color:var(--green-dark);margin-bottom:28px;">
+          Envíanos un mensaje
+        </h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" placeholder="Tu nombre"/>
+          </div>
+          <div class="form-group">
+            <label>Apellido</label>
+            <input type="text" placeholder="Tu apellido"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" placeholder="tu@correo.com"/>
+        </div>
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input type="tel" placeholder="+58 4XX XXX XXXX"/>
+        </div>
+        <div class="form-group">
+          <label>Tipo de consulta</label>
+          <select>
+            <option value="">Selecciona una opción</option>
+            <option>Pedido de huevos</option>
+            <option>Información de productos</option>
+            <option>Distribución / Mayorista</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Mensaje</label>
+          <textarea placeholder="Cuéntanos en qué podemos ayudarte..."></textarea>
+        </div>
+        <button class="btn-send" type="submit">
+          <i class="fas fa-paper-plane"></i>
+          Enviar Mensaje
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="fotos/logo-white.png" alt="La Fronda Agroavícola" style="height:48px;width:auto;margin-bottom:16px;display:block;"/>
+        <h3>Agroavícola La Fronda CA</h3>
+        <p>Empresa venezolana dedicada a la producción de huevos frescos con calidad, bienestar animal y compromiso con Venezuela.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#quienes">Quiénes Somos</a></li>
+          <li><a href="#que">Qué Hacemos</a></li>
+          <li><a href="#como">Nuestro Proceso</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="#">Huevos Frescos</a></li>
+          <li><a href="#">Huevos por Mayor</a></li>
+          <li><a href="#">Distribución</a></li>
+          <li><a href="#">Consultas</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Agroavícola La Fronda CA · Venezuela · Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <!-- ══ SCRIPTS ════════════════════════════════════════ -->
+  <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Mobile menu
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    document.addEventListener('click', e => {
+      if (!e.target.closest('nav') && !e.target.closest('.mobile-menu'))
+        document.getElementById('mobileMenu').classList.remove('open');
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+    // Animated counters
+    function animateCounter(el, target, suffix='') {
+      let start = 0;
+      const duration = 1800;
+      const step = timestamp => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        const val = Math.floor(ease * target);
+        el.textContent = val.toLocaleString('es') + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          document.querySelectorAll('[data-target]').forEach(el => {
+            const target = parseInt(el.dataset.target);
+            const suffix = target === 100 ? '%' : target === 365 ? '' : target >= 1000 ? '+' : '+';
+            animateCounter(el, target, suffix);
+          });
+          statsObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    const heroStats = document.querySelector('.hero-stats');
+    if (heroStats) statsObserver.observe(heroStats);
+
+    // Smooth active link
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 100) current = s.id;
+      });
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--green-main)' : '';
+      });
+    });
+  </script>
+</body>
+</html>
