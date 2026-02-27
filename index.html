@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Agroavícola La Fronda CA</title>
+  <!-- ═══ FAVICON ═══ -->
+  <link rel="icon" type="image/png" href="fotos/logo.png"/>
+  <link rel="shortcut icon" type="image/png" href="fotos/logo.png"/>
+  <link rel="apple-touch-icon" href="fotos/logo.png"/>
+  <meta name="theme-color" content="#1a5c28"/>
+  <!-- ═══════════════ -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
@@ -994,7 +1000,7 @@
             <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
             <div class="contact-item-text">
               <h4>Correo Electrónico</h4>
-              <p>ventas.lafronda@gmail.com</p>
+              <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1563707b6174663b797473677a7b7174557278747c793b767a78">[email&#160;protected]</a></p>
             </div>
           </div>
           <div class="contact-item">
@@ -1091,7 +1097,7 @@
   </footer>
 
   <!-- ══ SCRIPTS ════════════════════════════════════════ -->
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     // Navbar scroll
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
@@ -1154,12 +1160,4 @@
     window.addEventListener('scroll', () => {
       let current = '';
       sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 100) current = s.id;
-      });
-      document.querySelectorAll('.nav-links a').forEach(a => {
-        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--green-main)' : '';
-      });
-    });
-  </script>
-</body>
-</html>
+        if (window.scrollY >= s.offsetTop
